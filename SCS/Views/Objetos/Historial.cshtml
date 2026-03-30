@@ -1,0 +1,132 @@
+﻿@model IEnumerable<SCS.Models.BitacoraMovimientos>
+
+@{
+    ViewData["Title"] = "Historial de Movimientos";
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SCS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SCS.styles.css" asp-append-version="true" />
+    <style>
+        .card {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        th, td {
+            vertical-align: middle;
+        }
+
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            right: 40px;
+            z-index: 1000;
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+            .logo-container img {
+                width: 230px;
+                height: auto;
+            }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="/imagen/logo.png" alt="Intel Logo" />
+    </div>
+    <div class="container content-spacing">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Historial de Movimientos</h2>
+            </div>
+            <div class="card-body">
+                @if (Model != null && Model.Any())
+                {
+                    <div class="table-container">
+                        <table class="table table-bordered table-striped text-center">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Fecha de Acción</th>
+                                    <th>Hora de Acción</th>
+                                    <th>Usuario</th>
+                                    <th>Tipo de Acción</th>
+                                    <th>Descripción</th>
+                                    <th>Ingresos</th>
+                                    <th>Egresos</th>
+                                    <th>Informacion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var movimiento in Model)
+                                {
+                                    <tr>
+                                        <td>@movimiento.Fecha_accion?.ToString("dd/MM/yyyy")</td>
+                                        <td>@movimiento.Hora_accion?.ToString(@"hh\:mm\:ss")</td>
+                                        <td>@movimiento.Usuario</td>
+                                        <td>@movimiento.Tipo_accion</td>
+                                        <td>@movimiento.Descripcion</td>
+                                        <td>
+                                            @if (movimiento.Ingresos != null)
+                                            {
+                                                <strong>Cantidad:</strong> @movimiento.Ingresos.Cantidad <br />
+                                                <strong>Motivo:</strong> @movimiento.Ingresos.Motivo
+                                            }
+                                            else
+                                            {
+                                                <span>No aplica</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (movimiento.Egresos != null)
+                                            {
+                                                <strong>Cantidad:</strong> @movimiento.Egresos.Cantidad <br />
+                                                <strong>Motivo:</strong> @movimiento.Egresos.Motivo
+                                            }
+                                            else
+                                            {
+                                                <span>No aplica</span>
+                                            }
+                                        </td>
+                                        <td> <strong>Parte</strong> </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-warning text-center mt-3">
+                        <p>No se encontró historial para esta parte.</p>
+                    </div>
+                }
+            </div>
+            <div class="card-footer text-center">
+                <a class="btn btn-secondary" href="@Url.Action("Index", "Objetos")"> <i class="fa-solid fa-rotate-left"></i>Volver al listado</a>
+            </div>
+        </div>
+    </div>
+    <footer class="border-top footer text-muted">
+            <strong>&copy; 2024 - SCS</strong>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/5a833361a2.js" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+﻿@{
+    ViewData["Title"] = "Acerca De";
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HTS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SCS.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/estilo.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHq6Nz4Mb+k6bM2T50i29Qe4n5cG3ZDZl0zcn4LY0GHav1vF3lZ+3mDf0qf68r5ZgJ0Zf8Eg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            background-color: #2271b3; 
+        }
+
+        .about-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .about-card {
+            max-width: 600px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-header {
+            color: #000;
+            font-weight: bold;
+            padding: 10px;
+            text-align: center;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .card-body {
+            padding: 20px;
+            text-align: left; 
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            position: sticky;
+            bottom: 0;
+        }
+
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            right: 40px;
+            z-index: 1000;
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+            .logo-container img {
+                width: 230px;
+                height: auto;
+            }
+    </style>
+    <script>
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+        window.onload = noBack;
+        window.onpageshow = function (evt) {
+            if (evt.persisted) noBack();
+        }
+        window.onunload = function () { null };
+    </script>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="/imagen/logo.png" alt="Intel Logo" />
+    </div>
+    <div class="about-container">
+        <div class="about-card">
+                <div class="card-header">
+                    Acerca de Nosotros
+                </div>
+                <div class="card-body">
+                    <p>
+                        Probablemente tengas algunas dudas sobre nosotros, aquí detallamos ciertos aspectos importantes que nos representan:
+                    </p>
+                    <p><strong>Acrónimo:</strong> HTS</p>
+                    <p><strong>Nombre:</strong> Stock Control System</p>
+                    <p><strong>Versión:</strong> 1.0.0</p>
+                    <p><strong>Fecha:</strong> 18/10/24</p>
+                    <p><strong>Propietario:</strong> Intel Corporation</p>
+                    <p><strong>Desarrollador:</strong> Fabian Alonso Umaña Quiros</p>
+                    <p><strong>Lenguajes:</strong> ASP.NET Core, C#, CSS, Bootstrap, HTML, JQuery, JS</p>
+
+                    <div class="text-center mt-3">
+                        <a class="btn btn-secondary" asp-area="" asp-controller="Home" asp-action="Index">
+                            <i class="fa-solid fa-rotate-left"></i> Regresar
+                        </a>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <footer class="border-top footer text-muted">
+            <strong>&copy; 2024 - SCS</strong>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/5a833361a2.js" crossorigin="anonymous"></script>
+</body>
+</html>

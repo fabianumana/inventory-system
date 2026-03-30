@@ -1,0 +1,88 @@
+﻿@model SCS.Models.Permisos
+
+@{
+    ViewData["Title"] = "Deshabilitar Permiso";
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SCS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SCS.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/estilo.css" asp-append-version="true" />
+    <style>
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            right: 40px;
+            z-index: 1000;
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+            .logo-container img {
+                width: 230px;
+                height: auto;
+            }
+
+        .card {
+            max-width: 400px;
+            margin: auto;
+        }
+
+        .card-header {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .card-body dl dt {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="/imagen/logo.png" alt="Intel Logo" />
+    </div>
+    <div class="container content-spacing">
+        <div class="card">
+            <div class="card-header text-center text-black">
+                <h2>Deshabilitar Permiso</h2>
+            </div>
+            <div class="card-body text-center">
+                <dl class="row">
+                    <dt class="col-sm-4">ID</dt>
+                    <dd class="col-sm-8">@Model.Id_permiso</dd>
+
+                    <dt class="col-sm-4">Nombre</dt>
+                    <dd class="col-sm-8">@Model.NombrePermiso</dd>
+                </dl>
+                <form asp-action="DisableConfirmed" method="post">
+                    <input type="hidden" name="id" value="@Model.Id_permiso" readonly />
+                    <button type="submit" class="btn btn-danger w-100 mb-2">
+                        <i class="fa-solid fa-trash"></i>Confirmar Deshabilitación
+                    </button>
+                    <a class="btn btn-secondary w-100" href="@Url.Action("Index", "Permisos")">
+                        <i class="fa-solid fa-arrow-left"></i>Cancelar
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="border-top footer text-muted">
+            <strong>&copy; 2024 - SCS</strong>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/5a833361a2.js" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+﻿@model SCS.ViewModels.UsuariosVM
+
+@{
+    ViewData["Title"] = "Listado de Perfiles";
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SCS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SCS.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/estilo.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHq6Nz4Mb+k6bM2T50i29Qe4n5cG3ZDZl0zcn4LY0GHav1vF3lZ+3mDf0qf68r5ZgJ0Zf8Eg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            background-color: #2271b3;
+        }
+
+        .container {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .card {
+            max-width: 1100px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: auto;
+        }
+
+        .card-header {
+            color: #000;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .btn-uniform {
+            width: 100px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+
+        .content-spacing {
+            padding-bottom: 60px; 
+        }
+
+        .btn-uniform {
+            width: 120px; 
+            height: 40px; 
+            line-height: 1.5; 
+            text-align: center; 
+        }
+
+        .d-grid.gap-2 {
+            margin: 0 auto; 
+        }
+
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            right: 40px;
+            z-index: 1000;
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+            .logo-container img {
+                width: 230px;
+                height: auto;
+            }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="/imagen/logo.png" alt="Intel Logo" />
+    </div>
+    <div class="container content-spacing">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Listado de Perfiles</h2>
+            </div>
+            <div class="card-body">
+                <form method="get" action="@Url.Action("Index")" class="mb-4">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="filtroId">ID</label>
+                            <input type="number" class="form-control" name="filtroId" value="@Model.FiltroId" placeholder="Buscar por ID" />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="filtroNombre">Nombre</label>
+                            <input type="text" class="form-control" name="filtroNombre" value="@Model.FiltroNombre" placeholder="Buscar por nombre" />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="mostrarInactivos">Mostrar Inactivos</label>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="mostrarInactivos" name="mostrarInactivos" @(Model.MostrarInactivos == true ? "checked" : "") />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+
+                @if (Model.Perfiles.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Usuario</th>
+                                    <th>WWID</th>
+                                    <th>Apellidos</th>
+                                    <th>Correo</th>
+                                    <th>Teléfono</th>
+                                    <th>Departamento</th>
+                                    <th>Superior</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var perfil in Model.Perfiles)
+                                {
+                                    <tr>
+                                        <td>@perfil.Id_perfiles</td>
+                                        <td>@perfil.User</td>
+                                        <td>@perfil.WWID</td>
+                                        <td>@perfil.Apellidos</td>
+                                        <td>@perfil.Correo</td>
+                                        <td>@perfil.Telefono</td>
+                                        <td>@perfil.Departamento</td>
+                                        <td>@perfil.Superior</td>
+                                        <td>
+                                            <div class="d-flex gap-2">
+                                                <a class="btn btn-primary btn-sm btn-uniform" href="@Url.Action("Details", new { id = perfil.Id_perfiles })">
+                                                    <i class="fa-solid fa-eye"></i> Ver
+                                                </a>
+                                                <a class="btn btn-warning btn-sm btn-uniform" href="@Url.Action("Edit", new { id = perfil.Id_perfiles })">
+                                                    <i class="fa-solid fa-pen"></i> Editar
+                                                </a>
+                                                <a class="btn btn-danger btn-sm btn-uniform" href="@Url.Action("Disable", new { id = perfil.Id_perfiles })">
+                                                    <i class="fa-solid fa-trash"></i> Deshabilitar
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <p>No se encontraron perfiles.</p>
+                }
+
+                <ul>
+                    <li><a class="btn btn-secondary btn-custom mb-2" asp-controller="Home" asp-action="Inicio"><i class="fa-solid fa-rotate-left"></i> Regresar</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <footer class="border-top footer text-muted">
+            <strong>&copy; 2024 - SCS</strong>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/5a833361a2.js" crossorigin="anonymous"></script>
+</body>
+</html>

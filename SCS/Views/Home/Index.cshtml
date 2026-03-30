@@ -1,0 +1,29 @@
+﻿@using System.Security.Claims;
+@{
+    ViewData["Title"] = "Menú Principal";
+}
+
+<div class="container mt-5">
+    <div class="menu-card">
+        <div class="card">
+            <div class="card-header">
+                Menú Principal
+            </div>
+            <div class="card-body">
+                @if (User.Identity!.IsAuthenticated)
+                {
+                    <h5 class="text-center mb-4 font-roboto">Bienvenido, @User.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Name).Select(c => c.Value).SingleOrDefault()</h5>
+                }
+
+                <ul class="list-unstyled">
+                    <li><a class="btn btn-primary btn-custom mb-2" asp-controller="Home" asp-action="Inicio"><i class="fa-solid fa-play"></i> Inicio</a></li>
+                    <li><a class="btn btn-primary btn-custom mb-2" asp-controller="Administracion" asp-action="DetallesUsuario"><i class="fa-solid fa-id-badge"></i> Perfil</a></li>
+                    <li><a class="btn btn-primary btn-custom mb-2" asp-controller="Home" asp-action="Ayuda"><i class="fa-solid fa-handshake-angle"></i> Ayuda</a></li>
+                    <li><a class="btn btn-primary btn-custom mb-2" asp-controller="Administracion" asp-action="RevisarSolicitudes"><i class="fa-solid fa-hand"></i> Solicitudes de Rol</a></li>
+                    <li><a class="btn btn-primary btn-custom mb-2" asp-controller="Home" asp-action="AcercaDe"><i class="fa-solid fa-file-lines"></i> Acerca De</a></li>
+                    <li><a class="btn btn-secondary btn-custom mb-2" asp-controller="Home" asp-action="Logout"><i class="fa-solid fa-door-closed"></i> Salir</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

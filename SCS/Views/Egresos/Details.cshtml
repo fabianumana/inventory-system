@@ -1,0 +1,106 @@
+﻿@model SCS.Models.Egresos
+
+@{
+    ViewData["Title"] = "Detalles del Egreso";
+    Layout = ""; 
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SCS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SCS.styles.css" asp-append-version="true" />
+    <style>
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            right: 40px;
+            z-index: 1000;
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+            .logo-container img {
+                width: 230px;
+                height: auto;
+            }
+
+        .card {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+        }
+
+        .card-header {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        dl.row dt {
+            font-weight: 600;
+            color: #000;
+        }
+
+        dl.row dd {
+            margin-bottom: 10px;
+            color: #555;
+            word-break: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="/imagen/logo.png" alt="Intel Logo" />
+    </div>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h2>Detalles del Egreso</h2>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-5">ID Transacción</dt>
+                    <dd class="col-sm-7">@Model.Id_transaccion_eg</dd>
+
+                    <dt class="col-sm-5">Parte</dt>
+                    <dd class="col-sm-7">@Model.Parte?.Nombre</dd>
+
+                    <dt class="col-sm-5">Cantidad</dt>
+                    <dd class="col-sm-7">@Model.Cantidad</dd>
+
+                    <dt class="col-sm-5">Usuario de Salida</dt>
+                    <dd class="col-sm-7">@Model.Usuario_salida</dd>
+
+                    <dt class="col-sm-5">Motivo</dt>
+                    <dd class="col-sm-7">@Model.Motivo</dd>
+
+                    <dt class="col-sm-5">Departamento</dt>
+                    <dd class="col-sm-7">@Model.Departamento</dd>
+
+                    <dt class="col-sm-5">Fecha de Salida</dt>
+                    <dd class="col-sm-7">@Model.Fecha_salida?.ToShortDateString()</dd>
+                </dl>
+                <a href="@Url.Action("Index")" class="btn btn-secondary"> <i class="fa-solid fa-rotate-left"></i>Volver al Listado</a>
+            </div>
+        </div>
+    </div>
+    <footer class="border-top footer text-muted">
+            <strong>&copy; 2024 - SCS</strong>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/5a833361a2.js" crossorigin="anonymous"></script>
+</body>
+</html>

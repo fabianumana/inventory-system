@@ -1,0 +1,123 @@
+﻿@model SCS.Models.Egresos
+
+@{
+    ViewData["Title"] = "Crear Egreso";
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SCS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <style>
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            right: 40px;
+            z-index: 1000;
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+            .logo-container img {
+                width: 230px;
+                height: auto;
+            }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="/imagen/logo.png" alt="Intel Logo" />
+    </div>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Crear Egreso</h2>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create" method="post">
+                    <div class="mb-3">
+                        <label asp-for="Id_parte" class="form-label">Parte</label>
+                        <select asp-for="Id_parte" class="form-control" id="Id_parte">
+                            <option value="">Seleccione una parte</option>
+                            @foreach (var item in ViewBag.Objetos as IEnumerable<dynamic>)
+                            {
+                                <option value="@item.Id_parte" data-numero-parte="@item.NumeroParte">
+                                    @item.Text
+                                </option>
+                            }
+                        </select>
+                        <span asp-validation-for="Id_parte" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Cantidad" class="form-label">Cantidad</label>
+                        <input asp-for="Cantidad" class="form-control" />
+                        <span asp-validation-for="Cantidad" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Numero_serial" class="form-label">Número de Serie</label>
+                        <input asp-for="Numero_serial" class="form-control" readonly id="Numero_serial" />
+                        <span asp-validation-for="Numero_serial" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Usuario" class="form-label">Usuario (Jefe)</label>
+                        <input asp-for="Usuario" class="form-control" readonly />
+                        <span asp-validation-for="Usuario" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Departamento" class="form-label">Departamento</label>
+                        <input asp-for="Departamento" class="form-control" readonly />
+                        <span asp-validation-for="Departamento" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Usuario_salida" class="form-label">Usuario Salida</label>
+                        <input asp-for="Usuario_salida" class="form-control" readonly />
+                        <span asp-validation-for="Usuario_salida" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Motivo" class="form-label">Motivo</label>
+                        <select asp-for="Motivo" class="form-control">
+                            <option value="">Seleccione un Motivo</option>
+                            <option value="Venta">Venta</option>
+                            <option value="Refill">Prestamo</option>
+                        </select>
+                        <span asp-validation-for="Motivo" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Fecha_salida" class="form-label">Fecha de Salida</label>
+                        <input asp-for="Fecha_salida" class="form-control" readonly />
+                        <span asp-validation-for="Fecha_salida" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Crear</button>
+                    <a href="@Url.Action("Index")" class="btn btn-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="border-top footer text-muted">
+        <strong>&copy; 2024 - SCS</strong>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById("Id_parte").addEventListener("change", function () {
+            const selectedOption = this.options[this.selectedIndex];
+            const numeroParte = selectedOption.getAttribute("data-numero-parte");
+            document.getElementById("Numero_serial").value = numeroParte || "";
+        });
+    </script>
+</body>
+</html>

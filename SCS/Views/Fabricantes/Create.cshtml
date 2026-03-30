@@ -1,0 +1,180 @@
+﻿@model SCS.Models.Fabricantes
+
+@{
+    ViewData["Title"] = "Crear Nuevo Fabricante";
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SCS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SCS.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/estilo.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            background-color: #2271b3;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+            margin-top: 40px;
+            padding-bottom: 70px; 
+        }
+
+        .card {
+            max-width: 600px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background-color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            border-top: 1px solid #ccc;
+        }
+
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            right: 40px;
+            z-index: 1000;
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+            .logo-container img {
+                width: 230px;
+                height: auto;
+            }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="/imagen/logo.png" alt="Intel Logo" />
+    </div>
+    <div class="container">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Crear Nuevo Fabricante</h2>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create" method="post">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label asp-for="Nombre_Suplidor" class="control-label"></label>
+                        <input asp-for="Nombre_Suplidor" class="form-control" />
+                        <span asp-validation-for="Nombre_Suplidor" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Contacto" class="control-label"></label>
+                        <input asp-for="Contacto" class="form-control" />
+                        <span asp-validation-for="Contacto" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Telefono" class="control-label"></label>
+                        <input asp-for="Telefono" class="form-control" />
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Correo" class="control-label"></label>
+                        <input asp-for="Correo" class="form-control" />
+                        <span asp-validation-for="Correo" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Direccion" class="control-label"></label>
+                        <input asp-for="Direccion" class="form-control" />
+                        <span asp-validation-for="Direccion" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Pais" class="control-label"></label>
+                        <select asp-for="Pais" class="form-control">
+                            <option value="">Seleccione un país</option>
+                            <option value="Costa Rica">Costa Rica</option>
+                            <option value="Estados Unidos">Estados Unidos</option>
+                            <option value="Malasia">Malasia</option>
+                            <option value="Mexico">México</option>
+                        </select>
+                        <span asp-validation-for="Pais" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Condiciones" class="control-label"></label>
+                        <input asp-for="Condiciones" class="form-control" />
+                        <span asp-validation-for="Condiciones" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Colateral" class="control-label"></label>
+                        <select asp-for="Colateral" class="form-control">
+                            <option value="">Seleccione un colateral</option>
+                            <option value="TIU">TIU</option>
+                            <option value="AP">AP</option>
+                            <option value="Tester">Tester</option>
+                        </select>
+                        <span asp-validation-for="Colateral" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Fecha_Registro" class="control-label"></label>
+                        <input asp-for="Fecha_Registro" class="form-control" type="date" readonly value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        <span asp-validation-for="Fecha_Registro" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-save"></i> Guardar
+                    </button>
+                    <a href="@Url.Action("Index", "Fabricantes")" class="btn btn-secondary">
+                        <i class="fa-solid fa-arrow-left"></i> Cancelar
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <strong>&copy; 2024 - SCS</strong>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/5a833361a2.js" crossorigin="anonymous"></script>
+</body>
+</html>

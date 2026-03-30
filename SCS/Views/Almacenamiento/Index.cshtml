@@ -1,0 +1,228 @@
+﻿@model IEnumerable<SCS.Models.Almacenamiento>
+
+@{
+    ViewData["Title"] = "Listado de Almacenamiento";
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SCS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SCS.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/estilo.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            background-color: #2271b3;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            max-width: 1100px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .card-header {
+            color: #000;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .table-responsive {
+            margin-top: 20px;
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f9f9f9;
+        }
+
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            width: 100%;
+            position: sticky;
+            bottom: 0;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            border: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+            .btn-primary:hover {
+                background-color: #2980b9;
+            }
+
+        .btn-secondary {
+            background-color: #7f8c8d;
+            border: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+            .btn-secondary:hover {
+                background-color: #34495e;
+            }
+
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            right: 40px;
+            z-index: 1000;
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+            .logo-container img {
+                width: 230px;
+                height: auto;
+            }
+        
+        .btn-uniform {
+            width: 100px; 
+            text-align: center;
+            padding: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="/imagen/logo.png" alt="Intel Logo" />
+    </div>
+    <div class="container content-spacing">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Listado de Almacenamiento</h2>
+            </div>
+            <div class="card-body">
+                <form method="get" class="mb-4">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input type="text" name="parte" class="form-control" placeholder="Buscar por parte" value="@ViewBag.FiltroParte" />
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="suplidor" class="form-control" placeholder="Buscar por suplidor" value="@ViewBag.FiltroSuplidor" />
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="d-flex gap-2 mb-3">
+                    <a href="@Url.Action("ExportarExcel", "Almacenamiento")" class="btn btn-success">
+                        <i class="fa-solid fa-file-excel"></i> Exportar a Excel
+                    </a>
+                    <a href="@Url.Action("ExportarPdf", "Almacenamiento")" class="btn btn-danger">
+                        <i class="fa-solid fa-file-pdf"></i> Exportar a PDF
+                    </a>
+                </div>
+
+                @if (Model.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID Parte</th>
+                                    <th>Parte</th>
+                                    <th>Número Parte</th>
+                                    <th>Descripción</th>
+                                    <th>Cantidad Disponible</th>
+                                    <th>Ubicación</th>
+                                    <th>Suplidor</th>
+                                    <th>Fecha Ingreso</th>
+                                    <th>Fecha Vencimiento</th>
+                                    <th>Colateral</th>
+                                    <th>Archivo</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Id_parte</td>
+                                        <td>@item.Part</td>
+                                        <td>@item.Numero_parte</td>
+                                        <td>@item.Descripcion</td>
+                                        <td>@item.Cantidad_Disponible</td>
+                                        <td>@item.Ubicacion</td>
+                                        <td>@item.Suplidor</td>
+                                        <td>@item.Fecha_Ingreso?.ToString("dd/MM/yyyy")</td>
+                                        <td>@item.Fecha_Vencimiento?.ToString("dd/MM/yyyy")</td>
+                                        <td>@item.Colateral</td>
+                                        <td>
+                                            @if (item.Archivo != null)
+                                            {
+                                                <a href="@Url.Action("Descargar", "Almacenamiento", new { id = item.Id_parte })" class="btn btn-sm btn-success">
+                                                    <i class="fa-solid fa-download"></i> Descargar
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <span>No disponible</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <div class="d-flex gap-2">
+                                                <a href="@Url.Action("Details", new { id = item.Id_parte })" class="btn btn-primary btn-sm btn-uniform"><i class="fa-solid fa-eye"></i> Ver</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <p>No se encontraron registros de almacenamiento.</p>
+                }
+
+                <a href="@Url.Action("MenuReportes", "Home")" class="btn btn-secondary"><i class="fa-solid fa-rotate-left"></i> Regresar</a>
+            </div>
+        </div>
+    </div>
+    <footer class="border-top footer text-muted">
+        <strong>&copy; 2024 - SCS</strong>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

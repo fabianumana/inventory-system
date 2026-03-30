@@ -1,0 +1,154 @@
+﻿@model SCS.ViewModels.CreateObjetoViewModel
+
+@{
+    ViewData["Title"] = "Crear Objeto";
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SCS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            right: 40px;
+            z-index: 1000;
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+            .logo-container img {
+                width: 230px;
+                height: auto;
+            }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="/imagen/logo.png" alt="Intel Logo" />
+    </div>
+    <div class="container content-spacing">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Crear Nuevo Objeto</h2>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label asp-for="Numero_parte" class="form-label"></label>
+                        <input asp-for="Numero_parte" class="form-control" />
+                        <span asp-validation-for="Numero_parte" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Nombre" class="form-label"></label>
+                        <input asp-for="Nombre" class="form-control" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Descripcion" class="form-label"></label>
+                        <select asp-for="Descripcion" class="form-control">
+                            <option value="">Seleccione una Descripcion</option>
+                            <option value="Reparar">Reparar</option>
+                            <option value="Nueva">Nueva</option>
+                        </select>
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="SuplidorId" class="form-label">Fabricante</label>
+                        <select asp-for="SuplidorId" class="form-select" asp-items="Model.Suplidores" id="SuplidorIdDropdown">
+                            <option value="">Seleccione un fabricante</option>
+                        </select>
+                        <span asp-validation-for="SuplidorId" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">ID del Fabricante</label>
+                        <input type="text" id="FabricanteId" class="form-control" readonly />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Fabricante" class="form-label">Nombre del Fabricante</label>
+                        <input asp-for="Fabricante" class="form-control" id="FabricanteName" readonly />
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label asp-for="Cantidad_Disponible" class="form-label"></label>
+                        <input asp-for="Cantidad_Disponible" class="form-control" />
+                        <span asp-validation-for="Cantidad_Disponible" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Ubicacion" class="form-label"></label>
+                        <select asp-for="Ubicacion" class="form-control">
+                            <option value="">Seleccione una Ubicacion</option>
+                            <option value="Dock">Dock</option>
+                            <option value="Bunker">Bunker</option>
+                            <option value="Almacen">Almacen</option>
+                        </select>
+                        <span asp-validation-for="Ubicacion" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Stock_Minimo" class="form-label"></label>
+                        <input asp-for="Stock_Minimo" class="form-control" />
+                        <span asp-validation-for="Stock_Minimo" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Stock_Maximo" class="form-label"></label>
+                        <input asp-for="Stock_Maximo" class="form-control" />
+                        <span asp-validation-for="Stock_Maximo" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Fecha_Ingreso" class="form-label"></label>
+                        <input asp-for="Fecha_Ingreso" class="form-control" type="date" readonly value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        <span asp-validation-for="Fecha_Ingreso" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Fecha_Vencimiento" class="form-label"></label>
+                        <input asp-for="Fecha_Vencimiento" class="form-control" type="date" />
+                        <span asp-validation-for="Fecha_Vencimiento" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Foto" class="form-label">Adjuntar foto</label>
+                        <input asp-for="Foto" class="form-control" type="file" />
+                        <span asp-validation-for="Foto" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <a class="btn btn-secondary" href="@Url.Action("Index", "Objetos")">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="border-top footer text-muted">
+        <strong>&copy; 2024 - SCS</strong>
+    </footer>
+    <script>
+        document.getElementById('SuplidorIdDropdown').addEventListener('change', function () {
+            const selectedOption = this.options[this.selectedIndex];
+            document.getElementById('FabricanteId').value = selectedOption.value;
+            document.getElementById('FabricanteName').value = selectedOption.text;
+        });
+    </script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/5a833361a2.js" crossorigin="anonymous"></script>
+</body>
+</html>

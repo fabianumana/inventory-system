@@ -1,0 +1,121 @@
+﻿@model SCS.Models.Ingresos
+
+@{
+    ViewData["Title"] = "Editar Ingreso";
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SCS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SCS.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/estilo.css" asp-append-version="true" />
+    <style>
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            right: 40px;
+            z-index: 1000;
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+            .logo-container img {
+                width: 230px;
+                height: auto;
+            }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="/imagen/logo.png" alt="Intel Logo" />
+    </div>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Editar Ingreso</h2>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit" method="post">
+                    <input type="hidden" asp-for="Id_transaccion_ing" />
+
+                    <div class="mb-3">
+                        <label asp-for="Id_parte" class="form-label">Parte</label>
+                        <select asp-for="Id_parte" class="form-control" asp-items="@(ViewData["Id_parte"] as IEnumerable<SelectListItem> ?? new List<SelectListItem>())"></select>
+                        <span asp-validation-for="Id_parte" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Cantidad" class="form-label">Cantidad</label>
+                        <input asp-for="Cantidad" class="form-control" />
+                        <span asp-validation-for="Cantidad" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Numero_serial" class="form-label">Número de Serial</label>
+                        <input asp-for="Numero_serial" class="form-control" readonly />
+                        <span asp-validation-for="Numero_serial" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Id_perfil" class="form-label">ID Perfil</label>
+                        <input asp-for="Id_perfil" class="form-control" readonly />
+                        <span asp-validation-for="Id_perfil" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Usuario" class="form-label">Usuario (Jefe)</label>
+                        <input asp-for="Usuario" class="form-control" readonly />
+                        <span asp-validation-for="Usuario" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Usuario_ingreso" class="form-label">Usuario Ingreso</label>
+                        <input asp-for="Usuario_ingreso" class="form-control" readonly />
+                        <span asp-validation-for="Usuario_ingreso" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Motivo" class="form-label">Motivo</label>
+                        <select asp-for="Motivo" class="form-control">
+                            <option value="">Seleccione un Motivo</option>
+                            <option value="Stock">Stock</option>
+                            <option value="Refill">Refill</option>
+                        </select>
+                        <span asp-validation-for="Motivo" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Departamento" class="form-label">Departamento</label>
+                        <input asp-for="Departamento" class="form-control" readonly />
+                        <span asp-validation-for="Departamento" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Fecha_ingreso" class="form-label">Fecha de Ingreso</label>
+                        <input asp-for="Fecha_ingreso" class="form-control" readonly />
+                        <span asp-validation-for="Fecha_ingreso" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i>Guardar</button>
+                    <a href="@Url.Action("Index")" class="btn btn-secondary"><i class="fa-solid fa-rotate-left"></i>Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="border-top footer text-muted">
+            <strong>&copy; 2024 - SCS</strong>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/5a833361a2.js" crossorigin="anonymous"></script>
+</body>
+</html>

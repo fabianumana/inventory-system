@@ -1,0 +1,85 @@
+﻿@model SCS.Models.Objetos
+
+@{
+    ViewData["Title"] = "Detalles del Objeto";
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SCS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SCS.styles.css" asp-append-version="true" />
+    <style>
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            right: 40px;
+            z-index: 1000;
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+            .logo-container img {
+                width: 230px;
+                height: auto;
+            }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="/imagen/logo.png" alt="Intel Logo" />
+    </div>
+    <div class="container content-spacing">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Detalles del Objeto</h2>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">Nombre</dt>
+                    <dd class="col-sm-9">@Model.Nombre</dd>
+
+                    <dt class="col-sm-3">Número de Parte</dt>
+                    <dd class="col-sm-9">@Model.Numero_parte</dd>
+
+                    <dt class="col-sm-3">Descripción</dt>
+                    <dd class="col-sm-9">@Model.Descripcion</dd>
+
+                    <dt class="col-sm-3">Cantidad Disponible</dt>
+                    <dd class="col-sm-9">@Model.Cantidad_Disponible</dd>
+
+                    <dt class="col-sm-3">Ubicación</dt>
+                    <dd class="col-sm-9">@Model.Ubicacion</dd>
+
+                    <dt class="col-sm-3">Suplidor</dt>
+                    <dd class="col-sm-9">@Model.Suplidor.Nombre_Suplidor</dd>
+
+                    <dt class="col-sm-3">Fecha de Ingreso</dt>
+                    <dd class="col-sm-9">@Model.Fecha_Ingreso.ToShortDateString()</dd>
+
+                    <dt class="col-sm-3">Fecha de Vencimiento</dt>
+                    <dd class="col-sm-9">@Model.Fecha_Vencimiento?.ToShortDateString()</dd>
+                </dl>
+
+                <div class="mt-4">
+                    <a href="@Url.Action("Index")" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Volver al Listado</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="border-top footer text-muted">
+            <strong>&copy; 2024 - SCS</strong>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/5a833361a2.js" crossorigin="anonymous"></script>
+</body>
+</html>

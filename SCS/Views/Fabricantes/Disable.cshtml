@@ -1,0 +1,158 @@
+﻿@model SCS.Models.Fabricantes
+
+@{
+    ViewData["Title"] = "Deshabilitar Fabricante";
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SCS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SCS.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/estilo.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            background-color: #2271b3;
+        }
+
+        .content-spacing {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .card {
+            max-width: 400px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            text-align: center;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+        }
+
+            .card-header h2 {
+                font-size: 1.5rem;
+                margin: 10px 0;
+                color: #333;
+            }
+
+        .card-body {
+            padding: 20px;
+        }
+
+            .card-body dl {
+                margin: 0;
+            }
+
+                .card-body dl dt {
+                    font-weight: bold;
+                    color: #333;
+                }
+
+                .card-body dl dd {
+                    margin: 0 0 10px 0;
+                    color: #555;
+                }
+
+        .btn-danger, .btn-secondary {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            position: relative;
+        }
+
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            right: 40px;
+            z-index: 1000;
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+            .logo-container img {
+                width: 230px;
+                height: auto;
+            }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="/imagen/logo.png" alt="Intel Logo" />
+    </div>
+    <div class="container content-spacing">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Deshabilitar Fabricante</h2>
+            </div>
+            <div class="card-body">
+                <dl>
+                    <dt>ID del Suplidor</dt>
+                    <dd>@Model.Id_suplidor</dd>
+
+                    <dt>Nombre del Suplidor</dt>
+                    <dd>@Model.Nombre_Suplidor</dd>
+
+                    <dt>Contacto</dt>
+                    <dd>@Model.Contacto</dd>
+
+                    <dt>Teléfono</dt>
+                    <dd>@Model.Telefono</dd>
+
+                    <dt>Correo</dt>
+                    <dd>@Model.Correo</dd>
+
+                    <dt>Direccion</dt>
+                    <dd>@Model.Direccion</dd>
+
+                    <dt>País</dt>
+                    <dd>@Model.Pais</dd>
+
+                    <dt>Condiciones</dt>
+                    <dd>@Model.Condiciones</dd>
+
+                    <dt>Colateral</dt>
+                    <dd>@Model.Colateral</dd>
+                </dl>
+
+                <form asp-action="DisableConfirmed" method="post">
+                    <input type="hidden" name="id" value="@Model.Id_suplidor" />
+                    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i>Confirmar Deshabilitación</button>
+                    <a href="@Url.Action("Index", "Fabricantes")" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="border-top footer text-muted">
+            <strong>&copy; 2024 - SCS</strong>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

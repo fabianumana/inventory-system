@@ -1,0 +1,112 @@
+﻿@model SCS.ViewModels.ContraseñaOlvidadaVM;
+@{
+    ViewData["Title"] = "Confirmación de Restablecimiento de Contraseña";
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SCS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SCS.styles.css" asp-append-version="true" />
+    <script>
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+        window.onload = noBack;
+        window.onpageshow = function (evt) {
+            if (evt.persisted) noBack();
+        }
+        window.onunload = function () { null };
+    </script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            max-width: 500px;
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            width: 100%;
+        }
+
+        .btn-primary {
+            background-color: #2271b3;
+            border: none;
+        }
+
+            .btn-primary:hover {
+                background-color: #1a5c8c;
+            }
+
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            right: 40px;
+            z-index: 1000;
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+            .logo-container img {
+                width: 230px;
+                height: auto;
+            }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="/imagen/logo.png" alt="Intel Logo" />
+    </div>
+    <div class="container">
+        <div class="card">
+            <div class="card-header text-center">
+                <strong><h5>Confirmación de Restablecimiento de Contraseña</h5></strong>
+            </div>
+            <div class="card-body">
+                <p>
+                    <i class="fa-solid fa-envelope-circle-check"></i> Se ha enviado un correo electrónico con un enlace para restablecer tu contraseña.
+                </p>
+                <p>Por favor revisa tu bandeja de entrada.</p>
+                <p>Si no recibiste el correo, revisa tu carpeta de spam o intenta nuevamente.</p>
+            </div>
+            <div class="card-footer text-center">
+                <a class="btn btn-secondary btn-custom mb-2" href="@Url.Action("Login", "Acceso")" <i class="fa-solid fa-door-closed"></i> Cerrar Sesión</a>
+            </div>
+        </div>
+    </div>
+    <footer class="border-top footer text-muted">
+        <strong>&copy; 2024 - SCS</strong>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/5a833361a2.js" crossorigin="anonymous"></script>
+</body>
+</html>
